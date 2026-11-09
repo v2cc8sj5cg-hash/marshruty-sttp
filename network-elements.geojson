@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "route18-pole-off-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.393989,
+          59.978733
+        ]
+      },
+      "properties": {
+        "type": "pole_off",
+        "name": "Маршрут 18 — съём штанг",
+        "route": "18",
+        "direction": "К площади Академика Климова",
+        "description": "Место съёма токоприёмников перед автономным участком. Координаты предоставлены пользователем.",
+        "source": "Пользовательская отметка OpenStreetMap",
+        "status": "user_verified"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "route18-pole-on-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.394927,
+          59.979672
+        ]
+      },
+      "properties": {
+        "type": "pole_on",
+        "name": "Маршрут 18 — постановка в КШТ",
+        "route": "18",
+        "direction": "К станции Ручьи",
+        "description": "Место постановки токоприёмников в КШТ. Координаты предоставлены пользователем.",
+        "source": "Пользовательская отметка OpenStreetMap",
+        "status": "user_verified"
+      }
+    }
+  ]
+}
