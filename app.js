@@ -3,6 +3,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+// Оставляем обязательную атрибуцию OpenStreetMap, скрываем логотип Leaflet.
+map.attributionControl.setPrefix(false);
+
 const routeStyle = f => ({ color: f.properties?.color || '#1769aa', weight: 7, opacity: 1, lineCap: 'round', lineJoin: 'round' });
 const layers = {
   routes: L.geoJSON(null, { style: routeStyle, onEachFeature: (f,l) => l.on('click', () => showFeature(f.properties || {})) }),
@@ -56,4 +59,4 @@ routeSearch.addEventListener('input',e=>renderRoutes(e.target.value));
 document.getElementById('featureClose').addEventListener('click',()=>document.getElementById('featureCard').classList.add('hidden'));
 document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('sidebar').classList.add('open'));
 document.getElementById('closeBtn').addEventListener('click',()=>document.getElementById('sidebar').classList.remove('open'));
-if('serviceWorker'in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=4').catch(console.error));
+if('serviceWorker'in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=5').catch(console.error));
