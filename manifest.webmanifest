@@ -1,0 +1,10 @@
+{
+  "name": "Маршруты СТТП",
+  "short_name": "СТТП",
+  "lang": "ru",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f2f5f6",
+  "theme_color": "#142b3b",
+  "icons": []
+}
