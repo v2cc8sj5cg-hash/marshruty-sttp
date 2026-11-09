@@ -8,8 +8,9 @@ const layers = {
   wires: L.geoJSON(null, {style: f => ({color: f.properties?.status === 'removed' ? '#999' : '#e18b36', weight: 3, opacity: .95, dashArray: f.properties?.status === 'removed' ? '6 7' : null})}),
   nodes: L.geoJSON(null, {pointToLayer: (f, latlng) => {
     const type = f.properties?.type || 'node';
-    const color = type === 'switch' ? '#e18b36' : type === 'crossing' ? '#8d5cb5' : '#455a64';
-    return L.circleMarker(latlng, {radius: 6, color:'#fff', weight:2, fillColor:color, fillOpacity:1});
+    const color = type === 'switch' ? '#e18b36' : type === 'crossing' ? '#8d5cb5' : type === 'pole_off' ? '#d97706' : type === 'pole_on' ? '#168b87' : '#455a64';
+    const radius = (type === 'pole_off' || type === 'pole_on') ? 9 : 6;
+    return L.circleMarker(latlng, {radius, color:'#fff', weight:2, fillColor:color, fillOpacity:1});
   }, onEachFeature: (f,l) => l.on('click', () => showFeature(f.properties || {}))}),
   stops: L.geoJSON(null, {pointToLayer: (f, latlng) => L.circleMarker(latlng, {radius:4,color:'#fff',weight:1,fillColor:'#278c75',fillOpacity:1}), onEachFeature:(f,l)=>l.on('click',()=>showFeature(f.properties||{}))})
 };
@@ -24,6 +25,7 @@ function showFeature(p) {
   document.getElementById('featureContent').innerHTML =
     `<h3>${escapeHtml(p.name || p.type || 'Объект сети')}</h3><p>${escapeHtml(p.description || 'Описание объекта пока не добавлено.')}</p>` +
     (p.route ? `<p><b>Маршрут:</b> ${escapeHtml(String(p.route))}</p>` : '') +
+    (p.direction ? `<p><b>Направление:</b> ${escapeHtml(p.direction)}</p>` : '') +
     (p.status ? `<p><b>Статус:</b> ${escapeHtml(p.status)}</p>` : '');
   document.getElementById('featureCard').classList.remove('hidden');
 }
