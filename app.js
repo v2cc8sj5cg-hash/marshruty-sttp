@@ -1,22 +1,27 @@
 const map = L.map('map', {
   zoomControl: true,
-  preferCanvas: true
+  preferCanvas: true,
+  attributionControl: false
 }).setView([59.9386, 30.3141], 11);
 
-map.attributionControl.setPrefix(false);
+// Показываем только атрибуцию OpenStreetMap.
+L.control.attribution({
+  prefix: false,
+  position: 'bottomright'
+}).addTo(map);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-// Оставляем обязательную атрибуцию OpenStreetMap, скрываем логотип Leaflet.
 
-map.attributionControl.remove();
-
-L.control.attribution({
-  prefix: false,
-  position: 'bottomright'
-}).addTo(map);
+const routeStyle = f => ({
+  color: f.properties?.color || '#1769aa',
+  weight: 7,
+  opacity: 1,
+  lineCap: 'round',
+  lineJoin: 'round'
+});
 
 const routeStyle = f => ({ color: f.properties?.color || '#1769aa', weight: 7, opacity: 1, lineCap: 'round', lineJoin: 'round' });
 const layers = {
