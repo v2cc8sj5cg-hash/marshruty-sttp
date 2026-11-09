@@ -1,16 +1,14 @@
 const map = L.map('map', {
   zoomControl: true,
-  preferCanvas: true,
-  attributionControl: false
+  preferCanvas: true
 }).setView([59.9386, 30.3141], 11);
 
-L.control.attribution({
-  prefix: false
-}).addTo(map);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
+map.attributionControl.setPrefix(false);
 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
 // Оставляем обязательную атрибуцию OpenStreetMap, скрываем логотип Leaflet.
 
 map.attributionControl.remove();
