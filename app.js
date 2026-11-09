@@ -18,6 +18,14 @@ L.control.attribution({
   position: 'bottomright'
 }).addTo(map);
 
+setTimeout(() => {
+  const el = document.querySelector('.leaflet-control-attribution');
+  const info = document.createElement('div');
+  info.style.cssText = 'position:absolute;top:60px;left:10px;z-index:9999;background:white;color:black;padding:12px;max-width:90%;font-size:12px;overflow-wrap:anywhere';
+  info.textContent = el ? 'АТРИБУЦИЯ: ' + el.innerHTML : 'Контрол атрибуции не найден';
+  document.body.appendChild(info);
+}, 1000);
+
 const routeStyle = f => ({ color: f.properties?.color || '#1769aa', weight: 7, opacity: 1, lineCap: 'round', lineJoin: 'round' });
 const layers = {
   routes: L.geoJSON(null, { style: routeStyle, onEachFeature: (f,l) => l.on('click', () => showFeature(f.properties || {})) }),
