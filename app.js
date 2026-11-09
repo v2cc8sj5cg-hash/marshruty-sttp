@@ -12,7 +12,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Оставляем обязательную атрибуцию OpenStreetMap, скрываем логотип Leaflet.
-map.attributionControl.setPrefix(false);
+
+map.attributionControl.remove();
+
+L.control.attribution({
+  prefix: false,
+  position: 'bottomright'
+}).addTo(map);
 
 const routeStyle = f => ({ color: f.properties?.color || '#1769aa', weight: 7, opacity: 1, lineCap: 'round', lineJoin: 'round' });
 const layers = {
