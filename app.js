@@ -4,7 +4,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const layers = {
-  routes: L.geoJSON(null, {style: f => ({color: f.properties?.color || '#2774b8', weight: 5, opacity: .9})}),
+  routes: L.geoJSON(null, {style: f => ({color: f.properties?.color || '#2774b8', weight: 5, opacity: .92, dashArray: f.properties?.geometry_quality === 'schematic_draft' ? '8 5' : null})}),
   wires: L.geoJSON(null, {style: f => ({color: f.properties?.status === 'removed' ? '#999' : '#e18b36', weight: 3, opacity: .95, dashArray: f.properties?.status === 'removed' ? '6 7' : null})}),
   nodes: L.geoJSON(null, {pointToLayer: (f, latlng) => {
     const type = f.properties?.type || 'node';
@@ -56,7 +56,7 @@ function renderRoutes(filter='') {
       }));
       const b = L.geoJSON(f).getBounds();
       if (b.isValid()) map.fitBounds(b.pad(.15));
-      showFeature({name:`Маршрут №${p.number}`,description:p.description || 'Трасса и направления будут добавлены после оцифровки.',termini:p.termini});
+      showFeature({name:`Маршрут №${p.number}`,description:p.description || 'Описание маршрута отсутствует.',termini:p.termini, direction:p.verification || p.direction});
     });
     routeList.appendChild(item);
   });

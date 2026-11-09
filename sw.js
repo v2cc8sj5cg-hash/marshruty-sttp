@@ -1,4 +1,4 @@
-const CACHE='sttp-shell-v1';
+const CACHE='sttp-shell-v3';
 const CORE=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./data/routes.geojson','./data/contact-network.geojson','./data/network-elements.geojson','./data/stops.geojson'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE))));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
