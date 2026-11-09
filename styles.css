@@ -25,3 +25,6 @@ footer{font-size:10px;line-height:1.5;color:#87939a;border-top:1px solid var(--l
 .feature-card{position:absolute;z-index:450;bottom:18px;left:18px;width:min(330px,calc(100% - 36px));background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px;box-shadow:0 8px 28px #132b3b22}.feature-card h3{margin:0 25px 7px 0;font-size:16px}.feature-card p{font-size:12px;line-height:1.5;color:#64727a;margin:5px 0}.feature-close{position:absolute;right:10px;top:8px;border:0;background:none;font-size:22px;color:#718087;cursor:pointer}.hidden{display:none}
 .leaflet-container{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 @media(max-width:760px){.topbar{height:58px;padding:0 14px}.topbar .icon-btn{display:block}main{height:calc(100% - 58px)}.sidebar{position:absolute;top:58px;bottom:0;left:0;width:min(350px,88vw);transform:translateX(-105%);transition:transform .2s;box-shadow:8px 0 25px #132b3b18}.sidebar.open{transform:translateX(0)}.close-btn{display:block}#map{height:100%}.zoom-note{max-width:190px;line-height:1.4}.map-hint{top:10px;left:10px}}
+.leaflet-control-attribution a[href*="leafletjs.com"] {
+  display: none !important;
+}
