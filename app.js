@@ -71,6 +71,9 @@ async function loadLayer(name, path) {
     if (name === 'routes') {
       routeFeatures = data.features || [];
       renderRoutes();
+      // Автоматически показываем загруженную сеть, а не оставляем карту в центре города.
+      const bounds = layers.routes.getBounds();
+      if (bounds.isValid()) map.fitBounds(bounds.pad(0.12), { maxZoom: 13 });
     }
   } catch (e) {
     console.warn(`Не удалось загрузить ${path}`, e);
