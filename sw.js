@@ -1,4 +1,5 @@
-const CACHE = 'sttp-shell-v6';
+const CACHE = 'sttp-shell-v7';
+
 const CORE = [
   './',
   './index.html',
@@ -30,38 +31,38 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
+  const request = event.request;
+  const url = new URL(request.url);
 
-  const url = new URL(event.request.url);
-  const isAppCode = url.pathname.endsWith('/app.js') ||
-                    url.pathname.endsWith('/index.html') ||
-                    url.pathname.endsWith('/sw.js');
+  if (request.method !== 'GET' || url.origin !== self.location.origin) return;
 
-  if (isAppCode) {
+  const isAppFile = ['app.js', 'index.html', 'sw.js', 'styles.css']
+    .some(file => url.pathname.endsWith('/' + file));
+
+  if (isAppFile) {
     event.respondWith(
-      fetch(event.request, { cache: 'no-store' })
+      fetch(request, { cache: 'no-store' })
         .then(response => {
-          if (response.ok && url.origin === self.location.origin) {
+          if (response.ok) {
             const copy = response.clone();
-            caches.open(CACHE).then(cache => cache.put(event.request, copy));
+            caches.open(CACHE).then(cache => cache.put(request, copy));
           }
           return response;
         })
-        .catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
+        .catch(() => caches.match(request))
     );
     return;
   }
 
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
-      return fetch(event.request).then(response => {
-        if (response.ok && url.origin === self.location.origin) {
+    caches.match(request).then(cached =>
+      cached || fetch(request).then(response => {
+        if (response.ok) {
           const copy = response.clone();
-          caches.open(CACHE).then(cache => cache.put(event.request, copy));
+          caches.open(CACHE).then(cache => cache.put(request, copy));
         }
         return response;
-      });
-    })
+      })
+    )
   );
 });
